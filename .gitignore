@@ -1,0 +1,4 @@
+project-mayhem
+*_test
+*.swp
+*.log
