@@ -13,8 +13,8 @@ const (
 )
 
 func main() {
-	http.HandleFunc("/", index)
 	port := getPort()
+	http.HandleFunc("/", index)
 	log.Printf("Listening on %s\n", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
