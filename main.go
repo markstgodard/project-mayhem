@@ -14,8 +14,9 @@ const (
 
 func main() {
 	http.HandleFunc("/", index)
+	port := getPort()
 	log.Printf("Listening on %s\n", port)
-	log.Fatal(http.ListenAndServe(":"+getPort(), nil))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
 
 func index(res http.ResponseWriter, req *http.Request) {
