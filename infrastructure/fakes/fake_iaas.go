@@ -7,7 +7,7 @@ import (
 	"github.com/markstgodard/project-mayhem/infrastructure"
 )
 
-type FakeProvider struct {
+type FakeIaas struct {
 	DestroyStub        func(id string) error
 	destroyMutex       sync.RWMutex
 	destroyArgsForCall []struct {
@@ -18,7 +18,7 @@ type FakeProvider struct {
 	}
 }
 
-func (fake *FakeProvider) Destroy(id string) error {
+func (fake *FakeIaas) Destroy(id string) error {
 	fake.destroyMutex.Lock()
 	fake.destroyArgsForCall = append(fake.destroyArgsForCall, struct {
 		id string
@@ -31,23 +31,23 @@ func (fake *FakeProvider) Destroy(id string) error {
 	}
 }
 
-func (fake *FakeProvider) DestroyCallCount() int {
+func (fake *FakeIaas) DestroyCallCount() int {
 	fake.destroyMutex.RLock()
 	defer fake.destroyMutex.RUnlock()
 	return len(fake.destroyArgsForCall)
 }
 
-func (fake *FakeProvider) DestroyArgsForCall(i int) string {
+func (fake *FakeIaas) DestroyArgsForCall(i int) string {
 	fake.destroyMutex.RLock()
 	defer fake.destroyMutex.RUnlock()
 	return fake.destroyArgsForCall[i].id
 }
 
-func (fake *FakeProvider) DestroyReturns(result1 error) {
+func (fake *FakeIaas) DestroyReturns(result1 error) {
 	fake.DestroyStub = nil
 	fake.destroyReturns = struct {
 		result1 error
 	}{result1}
 }
 
-var _ infrastructure.Provider = new(FakeProvider)
+var _ infrastructure.Iaas = new(FakeIaas)
