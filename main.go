@@ -1,11 +1,11 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"os"
 
 	log "github.com/Sirupsen/logrus"
+	"github.com/markstgodard/project-mayhem/durden"
 )
 
 const (
@@ -14,13 +14,13 @@ const (
 
 func main() {
 	port := getPort()
-	http.HandleFunc("/", index)
+
+	pm := durden.NewProjectMayhem()
+
+	http.HandleFunc("/", pm.StatusHandler)
+
 	log.Printf("Listening on %s\n", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))
-}
-
-func index(res http.ResponseWriter, req *http.Request) {
-	fmt.Fprintln(res, "nothing to see yet")
 }
 
 func getPort() string {
