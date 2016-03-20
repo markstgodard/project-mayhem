@@ -3,6 +3,8 @@ package durden
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/markstgodard/project-mayhem/infrastructure"
 )
 
 const (
@@ -13,19 +15,13 @@ const (
 type ProjectMayhem struct {
 	Status           string
 	TargetDeployment string
-	VirtualMachines  VMs
+	VirtualMachines  infrastructure.VMs
 }
-
-type VM struct {
-	Id    string
-	State string
-}
-type VMs []VM
 
 type systemStatus struct {
 	Status           string
 	TargetDeployment string
-	VirtualMachines  VMs
+	VirtualMachines  infrastructure.VMs
 }
 
 func NewProjectMayhem() *ProjectMayhem {
