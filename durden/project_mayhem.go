@@ -5,7 +5,12 @@ import (
 	"net/http"
 )
 
-type systemStatus struct {
+const (
+	StatusStopped = "stopped"
+	StatusRunning = "running"
+)
+
+type ProjectMayhem struct {
 	Status           string
 	TargetDeployment string
 	VirtualMachines  VMs
@@ -17,7 +22,7 @@ type VM struct {
 }
 type VMs []VM
 
-type ProjectMayhem struct {
+type systemStatus struct {
 	Status           string
 	TargetDeployment string
 	VirtualMachines  VMs
@@ -25,7 +30,7 @@ type ProjectMayhem struct {
 
 func NewProjectMayhem() *ProjectMayhem {
 	return &ProjectMayhem{
-		Status: "stopped",
+		Status: StatusStopped,
 	}
 }
 
