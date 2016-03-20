@@ -1,0 +1,12 @@
+sudo: false
+language: go
+go:
+    - 1.5.3
+before_install:
+  - go get github.com/tools/godep
+  - go get github.com/onsi/ginkgo/ginkgo
+install: true
+script: ginkgo -r -p
+branches:
+    only:
+        - master
