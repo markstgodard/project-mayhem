@@ -1,4 +1,4 @@
-# Project Mayhem
+# Project Mayhem [![Build Status](https://travis-ci.org/markstgodard/project-mayhem.svg?branch=master)](https://travis-ci.org/markstgodard/project-mayhem#)
 
 ## About
 Project Mayhem is a tool to kill VMs in a [Cloud Foundry](https://cloudfoundry.org) [bosh](https://bosh.io) deployed system.
