@@ -1,5 +1,5 @@
 # Project Mayhem [![Build Status](https://travis-ci.org/markstgodard/project-mayhem.svg?branch=master)](https://travis-ci.org/markstgodard/project-mayhem#)
-
+![Project Mayhem](http://media0.giphy.com/media/50aMsYRamQJr2/giphy.gif)
 ## About
 Project Mayhem is a tool to kill VMs in a [Cloud Foundry](https://cloudfoundry.org) [bosh](https://bosh.io) deployed system.
 The purpose is to test high availability and resiliency of a system.
