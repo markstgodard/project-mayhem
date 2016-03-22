@@ -9,9 +9,23 @@ import (
 
 var _ = Describe("Durden", func() {
 
+	var (
+		cfg Config
+	)
+
 	Context("NewProjectMayhem", func() {
 
-		It("creates a new project mayhem", func() {
+		BeforeEach(func() {
+			cfg = Config{
+				Deployment: BoshDeployment{
+					Host:     "https://192.168.50.4:25555",
+					Username: "admin",
+					Password: "admin",
+				},
+			}
+		})
+
+		It("creates a new project mayhem from config", func() {
 			pm := NewProjectMayhem()
 			Expect(pm).ToNot(BeNil())
 			Expect(pm.Status).To(Equal(StatusStopped))

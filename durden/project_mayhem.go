@@ -13,6 +13,7 @@ const (
 )
 
 type ProjectMayhem struct {
+	config           *Config
 	Status           string
 	TargetDeployment string
 	VirtualMachines  infrastructure.VMs
@@ -26,6 +27,7 @@ type systemStatus struct {
 
 func NewProjectMayhem() *ProjectMayhem {
 	return &ProjectMayhem{
+		config: LoadConfig(),
 		Status: StatusStopped,
 	}
 }
