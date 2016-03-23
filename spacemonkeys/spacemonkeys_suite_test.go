@@ -1,4 +1,4 @@
-package durden_test
+package spacemonkeys_test
 
 import (
 	. "github.com/onsi/ginkgo"
@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestDurden(t *testing.T) {
+func TestSpacemonkeys(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Durden Suite")
+	RunSpecs(t, "SpaceMonkeys Suite")
 }

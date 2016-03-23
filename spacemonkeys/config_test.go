@@ -1,9 +1,9 @@
-package durden_test
+package spacemonkeys_test
 
 import (
 	"os"
 
-	. "github.com/markstgodard/project-mayhem/durden"
+	. "github.com/markstgodard/project-mayhem/spacemonkeys"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

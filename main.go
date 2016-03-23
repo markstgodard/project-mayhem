@@ -5,7 +5,7 @@ import (
 	"os"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/markstgodard/project-mayhem/durden"
+	"github.com/markstgodard/project-mayhem/spacemonkeys"
 )
 
 const (
@@ -15,7 +15,7 @@ const (
 func main() {
 	port := getPort()
 
-	pm := durden.NewProjectMayhem()
+	pm := spacemonkeys.NewProjectMayhem()
 
 	http.HandleFunc("/", pm.StatusHandler)
 

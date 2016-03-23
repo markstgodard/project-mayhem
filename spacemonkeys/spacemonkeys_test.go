@@ -1,13 +1,13 @@
-package durden_test
+package spacemonkeys_test
 
 import (
-	. "github.com/markstgodard/project-mayhem/durden"
+	. "github.com/markstgodard/project-mayhem/spacemonkeys"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
-var _ = Describe("Durden", func() {
+var _ = Describe("SpaceMonkeys", func() {
 
 	var (
 		cfg Config

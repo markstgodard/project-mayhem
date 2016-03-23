@@ -1,4 +1,4 @@
-package durden
+package spacemonkeys
 
 import (
 	"encoding/json"
