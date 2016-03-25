@@ -8,6 +8,12 @@ import (
 )
 
 type FakeDeployment struct {
+	NameStub        func() string
+	nameMutex       sync.RWMutex
+	nameArgsForCall []struct{}
+	nameReturns     struct {
+		result1 string
+	}
 	ListVMsStub        func() (infrastructure.VMs, error)
 	listVMsMutex       sync.RWMutex
 	listVMsArgsForCall []struct{}
@@ -15,6 +21,30 @@ type FakeDeployment struct {
 		result1 infrastructure.VMs
 		result2 error
 	}
+}
+
+func (fake *FakeDeployment) Name() string {
+	fake.nameMutex.Lock()
+	fake.nameArgsForCall = append(fake.nameArgsForCall, struct{}{})
+	fake.nameMutex.Unlock()
+	if fake.NameStub != nil {
+		return fake.NameStub()
+	} else {
+		return fake.nameReturns.result1
+	}
+}
+
+func (fake *FakeDeployment) NameCallCount() int {
+	fake.nameMutex.RLock()
+	defer fake.nameMutex.RUnlock()
+	return len(fake.nameArgsForCall)
+}
+
+func (fake *FakeDeployment) NameReturns(result1 string) {
+	fake.NameStub = nil
+	fake.nameReturns = struct {
+		result1 string
+	}{result1}
 }
 
 func (fake *FakeDeployment) ListVMs() (infrastructure.VMs, error) {
