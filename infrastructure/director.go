@@ -33,7 +33,7 @@ func (d *BoshDirector) GetDeployments() (BoshDeployments, error) {
 		},
 	}
 
-	resp, err := client.Get(fmt.Sprintf("%s/deployments"))
+	resp, err := client.Get(fmt.Sprintf("https://%s:%s@%s/deployments", d.username, d.password, d.host))
 	if err != nil {
 		return nil, err
 	}

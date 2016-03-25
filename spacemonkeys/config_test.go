@@ -17,7 +17,7 @@ var _ = Describe("Config", func() {
 	Context("Load", func() {
 
 		BeforeEach(func() {
-			os.Setenv("BOSH_DIRECTOR_HOST", "https://192.168.50.4:25555")
+			os.Setenv("BOSH_DIRECTOR_HOST", "192.168.50.4:25555")
 			os.Setenv("BOSH_DIRECTOR_USERNAME", "tyler")
 			os.Setenv("BOSH_DIRECTOR_PASSWORD", "durden")
 		})
@@ -30,7 +30,7 @@ var _ = Describe("Config", func() {
 
 		It("loads config from env", func() {
 			cfg = LoadConfig()
-			Expect(cfg.Deployment.Host).To(Equal("https://192.168.50.4:25555"))
+			Expect(cfg.Deployment.Host).To(Equal("192.168.50.4:25555"))
 			Expect(cfg.Deployment.Username).To(Equal("tyler"))
 			Expect(cfg.Deployment.Password).To(Equal("durden"))
 		})
