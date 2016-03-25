@@ -1,6 +1,10 @@
 package spacemonkeys
 
-import "os"
+import (
+	"os"
+
+	log "github.com/Sirupsen/logrus"
+)
 
 type BoshDeployment struct {
 	Host     string
@@ -13,6 +17,7 @@ type Config struct {
 }
 
 func LoadConfig() *Config {
+	log.Info("Loading config...")
 	boshDeployment := BoshDeployment{
 		Host:     os.Getenv("BOSH_DIRECTOR_HOST"),
 		Username: os.Getenv("BOSH_DIRECTOR_USERNAME"),

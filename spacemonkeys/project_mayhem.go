@@ -33,14 +33,23 @@ func NewProjectMayhem() *ProjectMayhem {
 }
 
 func (pm *ProjectMayhem) StatusHandler(w http.ResponseWriter, r *http.Request) {
+	deployments, err := pm.director.GetDeployments()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	status := &systemStatus{
 		Status:      pm.Status,
-		Deployments: pm.director.GetDeployments(),
+		Deployments: deployments,
 	}
 	json.NewEncoder(w).Encode(status)
 }
 
 func (pm *ProjectMayhem) ListDeploymentsHandler(w http.ResponseWriter, r *http.Request) {
-	deployments := pm.director.GetDeployments()
+	deployments, err := pm.director.GetDeployments()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	json.NewEncoder(w).Encode(deployments)
 }
