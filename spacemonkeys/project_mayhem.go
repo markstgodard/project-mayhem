@@ -13,30 +13,34 @@ const (
 )
 
 type ProjectMayhem struct {
-	config           *Config
-	Status           string
-	TargetDeployment string
-	VirtualMachines  infrastructure.VMs
+	config   *Config
+	Status   string
+	director infrastructure.Director
 }
 
 type systemStatus struct {
-	Status           string
-	TargetDeployment string
-	VirtualMachines  infrastructure.VMs
+	Status      string
+	Deployments infrastructure.BoshDeployments
 }
 
 func NewProjectMayhem() *ProjectMayhem {
+	cfg := LoadConfig()
 	return &ProjectMayhem{
-		config: LoadConfig(),
-		Status: StatusStopped,
+		config:   cfg,
+		director: infrastructure.NewDirector(cfg.Deployment.Host, cfg.Deployment.Username, cfg.Deployment.Password),
+		Status:   StatusStopped,
 	}
 }
 
 func (pm *ProjectMayhem) StatusHandler(w http.ResponseWriter, r *http.Request) {
 	status := &systemStatus{
-		Status:           pm.Status,
-		TargetDeployment: pm.TargetDeployment,
-		VirtualMachines:  pm.VirtualMachines,
+		Status:      pm.Status,
+		Deployments: pm.director.GetDeployments(),
 	}
 	json.NewEncoder(w).Encode(status)
+}
+
+func (pm *ProjectMayhem) ListDeploymentsHandler(w http.ResponseWriter, r *http.Request) {
+	deployments := pm.director.GetDeployments()
+	json.NewEncoder(w).Encode(deployments)
 }
