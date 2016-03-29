@@ -55,11 +55,22 @@ func (pm *ProjectMayhem) ListDeploymentsHandler(w http.ResponseWriter, r *http.R
 }
 
 func (pm *ProjectMayhem) ListVmsHandler(w http.ResponseWriter, r *http.Request) {
-	_, err := pm.director.GetDeployments()
+	deployments, err := pm.director.GetDeployments()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
+
 	vms := infrastructure.VMs{}
+	for _, d := range deployments {
+		depVms, err := pm.director.GetVmsForDeployment(d.Name)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		for _, v := range depVms {
+			vms = append(vms, v)
+		}
+	}
 	json.NewEncoder(w).Encode(vms)
 }

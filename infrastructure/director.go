@@ -10,6 +10,7 @@ import (
 
 type Director interface {
 	GetDeployments() (BoshDeployments, error)
+	GetVmsForDeployment(deployment string) (VMs, error)
 }
 
 type BoshDirector struct {
@@ -57,6 +58,31 @@ func (d *BoshDirector) GetDeployments() (BoshDeployments, error) {
 	}
 
 	return deps, nil
+}
+
+func (d *BoshDirector) GetVmsForDeployment(deployment string) (VMs, error) {
+	client := &http.Client{
+		Transport: &http.Transport{
+			TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+		},
+	}
+
+	resp, err := client.Get(fmt.Sprintf("https://%s:%s@%s/deployments/%s/vms", d.username, d.password, d.host, deployment))
+	if err != nil {
+		return nil, err
+	}
+
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	vms := VMs{}
+	err = json.Unmarshal([]byte(data), &vms)
+	if err != nil {
+		return nil, err
+	}
+	return vms, nil
 }
 
 type boshRelease struct {

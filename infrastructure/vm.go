@@ -1,8 +1,11 @@
 package infrastructure
 
 type VM struct {
-	Id    string
-	State string
+	Cid      string
+	JobName  string
+	JobState string
+	Index    int
+	Ips      []string
 }
 
 type VMs []VM
