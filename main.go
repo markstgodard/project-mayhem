@@ -18,6 +18,8 @@ func main() {
 	pm := spacemonkeys.NewProjectMayhem()
 
 	http.HandleFunc("/", pm.StatusHandler)
+	http.HandleFunc("/deployments", pm.ListDeploymentsHandler)
+	http.HandleFunc("/vms", pm.ListVmsHandler)
 
 	log.Printf("Listening on %s\n", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))

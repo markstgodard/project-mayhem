@@ -53,3 +53,13 @@ func (pm *ProjectMayhem) ListDeploymentsHandler(w http.ResponseWriter, r *http.R
 	}
 	json.NewEncoder(w).Encode(deployments)
 }
+
+func (pm *ProjectMayhem) ListVmsHandler(w http.ResponseWriter, r *http.Request) {
+	_, err := pm.director.GetDeployments()
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	vms := infrastructure.VMs{}
+	json.NewEncoder(w).Encode(vms)
+}
